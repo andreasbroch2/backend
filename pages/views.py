@@ -16,11 +16,14 @@ def index(request):
         return render(request, 'home.html', {'task_id' : task.task_id})
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
+        print(file)
         lines = file.readlines()
+        print(lines)
         string = "order_items"
-        string.encode()
+        string= string.encode('utf-8')
+        print(string)
         for line in lines:
-            line.encode()
+            print(line)
             if string in line:
                 lines.remove(line)
         file.close()
