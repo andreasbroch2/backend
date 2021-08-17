@@ -131,7 +131,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 CELERY_BROKER_URL = 'rediss://:pb5d4ce75956a43ed9f5ff82f516b976f0974fa54be93860ec5d5659f82bc11b0@ec2-54-73-168-48.eu-west-1.compute.amazonaws.com:23250'
-CELERY_RESULT_BACKEND = 'redis://:pb5d4ce75956a43ed9f5ff82f516b976f0974fa54be93860ec5d5659f82bc11b0@ec2-54-73-168-48.eu-west-1.compute.amazonaws.com:23250'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
