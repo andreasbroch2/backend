@@ -4,11 +4,8 @@ from time import sleep
 
 from pandas.core.frame import DataFrame
 from .database import Database
-import numpy as np
-import pandas as pd
 import gspread
 import time
-from oauth2client.service_account import ServiceAccountCredentials
 
 credentials = {
     "type": "service_account",

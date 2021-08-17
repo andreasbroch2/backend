@@ -134,7 +134,7 @@ CELERY_BROKER_URL = 'rediss://:pb5d4ce75956a43ed9f5ff82f516b976f0974fa54be93860e
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-
+CELERY_TASK_TRACK_STARTED = True
 
 
 # Default primary key field type
