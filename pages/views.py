@@ -16,14 +16,13 @@ def index(request):
         return render(request, 'home.html', {'task_id' : task.task_id})
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
-        myfile = open(file, 'w+')
-        lines = myfile.readlines()
+        lines = file.readlines()
         string = "order_items"
         for line in lines:
             if string in line:
                 lines.remove(line)
-        myfile.close()
-        csv = pd.read_table(myfile, header=None, sep=",", names=list(range(40)))
+        file.close()
+        csv = pd.read_table(file, header=None, sep=",", names=list(range(40)))
         df = pd.DataFrame(columns=['Ret', 'Antal'])
         for column in csv:
             if(column > 1):
