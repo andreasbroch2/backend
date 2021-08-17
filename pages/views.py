@@ -9,8 +9,8 @@ def home_view(request, *args, **kvargs):
 
 
 def index(request):
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
+    if request.method == 'POST' and request.FILES['product-sales']:
+        myfile = request.FILES['product-sales']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         filepath = fs.location + '/' + filename
