@@ -16,8 +16,8 @@ def index(request):
         return render(request, 'home.html', {'task_id' : task.task_id})
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
-        file.decode()
         lines = file.readlines()
+        lines.decode()
         string = "order_items"
         for line in lines:
             if string in line:
