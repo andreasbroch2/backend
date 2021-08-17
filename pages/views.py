@@ -17,9 +17,9 @@ def index(request):
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
-        lines.decode()
         string = "order_items"
         for line in lines:
+            line.decode()
             if string in line:
                 lines.remove(line)
         file.close()
