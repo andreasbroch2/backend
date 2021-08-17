@@ -44,7 +44,7 @@ def import_sales_csv(self, dict):
     df = df.replace('–', '-', regex=True)
     for i, row in df.iterrows():
         print(row[0])
-        progress_recorder.set_progress(i + 1, len(df.index), f'On iteration {i}')
+        progress_recorder.set_progress(i + 1, len(df.index))
         try:
             cell = worksheet.find(row[0])
             print(cell)
