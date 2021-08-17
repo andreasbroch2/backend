@@ -6,6 +6,10 @@ import numpy as np
 import pandas as pd
 import gspread
 import time
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 
 gc = gspread.oauth()
 db = Database()
