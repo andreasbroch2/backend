@@ -34,7 +34,7 @@ def index(request):
         # Eliminate invalid data from dataframe (see Example below for more context)
         num_df = (df.drop(['Antal'], axis=1).join(df['Antal'].apply(pd.to_numeric, errors='coerce')))
         num_df = num_df.dropna()
-        print('start task')
+        print(num_df)
         task = import_subscription_csv.delay(num_df.to_dict())
         return render(request, 'home.html', {'task_id' : task.task_id})
 

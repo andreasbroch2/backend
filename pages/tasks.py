@@ -26,11 +26,13 @@ db = Database()
 
 @shared_task(bind=True)
 def import_subscription_csv(self, dict):
+    print(dict)
     progress_recorder = ProgressRecorder(self)
     sh = gc.open('Mad')
     worksheet = sh.worksheet("Uge")
     num_df = DataFrame.from_dict(dict)
     num_df["Antal"] = pd.to_numeric(num_df["Antal"])
+    print(num_df)
     sales = num_df.groupby('Ret').sum()
     sales = sales.reset_index()
     print(sales)
