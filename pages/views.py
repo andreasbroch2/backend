@@ -2,7 +2,6 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pandas as pd
-from pandas.core.frame import DataFrame
 from .tasks import import_sales_csv, import_subscription_csv
 
 def home_view(request, *args, **kvargs):
@@ -24,7 +23,8 @@ def index(request):
             if string in line:
                 lines.remove(line)
         print(lines)
-        csv = DataFrame(lines, header=None, sep=",", names=list(range(40)))
+        print(file)
+        csv = pd.DataFrame(lines)
         print(csv)
         df = pd.DataFrame(columns=['Ret', 'Antal'])
         print(df)
