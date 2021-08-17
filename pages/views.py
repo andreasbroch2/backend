@@ -18,8 +18,8 @@ def index(request):
         file = request.FILES['subscription-sales']
         lines = file.readlines()
         string = "order_items"
+        string.encode()
         for line in lines:
-            line.decode()
             if string in line:
                 lines.remove(line)
         file.close()
