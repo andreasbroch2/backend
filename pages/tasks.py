@@ -42,9 +42,11 @@ def import_sales_csv(self, dict):
     worksheet = sh.worksheet("Uge")
     df = DataFrame.from_dict(dict)
     df = df.replace('–', '-', regex=True)
-    for i, row in df.iterrows():
+    progress = 0
+    for index, row in df.iterrows():
         print(row[0])
-        progress_recorder.set_progress(i + 1, 67)
+        progress = progress =+ 1
+        progress_recorder.set_progress(progress, len(df.index))
         try:
             cell = worksheet.find(row[0])
             print(cell)
