@@ -29,10 +29,12 @@ def index(request):
         df = pd.DataFrame(columns=['Ret', 'Antal'])
         print(df)
         for column in csv:
+            print(column)
             if(column > 1):
                 if (column % 2) == 0:
                     xtra = pd.DataFrame(data=csv.iloc[:, [column, column+1]])
                     xtra.columns = ['Ret', 'Antal']
+                    print(xtra)
                     df = df.append(xtra, ignore_index=True)                             
         df = df.dropna()
         # Eliminate invalid data from dataframe (see Example below for more context)
