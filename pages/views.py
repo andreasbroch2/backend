@@ -9,12 +9,12 @@ def home_view(request, *args, **kvargs):
 
 
 def index(request):
-    if request.FILES['product-sales']:
+    if 'product-sales' in request.FILES:
         myfile = request.FILES['product-sales']
         df = pd.read_csv(myfile)
         task = import_sales_csv.delay(df.to_dict())
         return render(request, 'home.html', {'task_id' : task.task_id})
-    if request.FILES['subscription-sales']:
+    elif 'subscription-sales' in request.FILES:
         myfile = request.FILES['subscription-sales']
         lines = myfile.readlines()
         string = "order_items"
