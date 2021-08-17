@@ -20,6 +20,7 @@ def index(request):
         string = "order_items"
         string.encode()
         for line in lines:
+            line.encode()
             if string in line:
                 lines.remove(line)
         file.close()
