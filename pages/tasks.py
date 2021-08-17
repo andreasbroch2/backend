@@ -1,7 +1,7 @@
 from celery import shared_task
 from celery_progress.backend import ProgressRecorder
 from time import sleep
-
+import pandas as pd
 from pandas.core.frame import DataFrame
 from .database import Database
 import gspread
@@ -25,12 +25,25 @@ db = Database()
 
 
 @shared_task(bind=True)
-def go_to_sleep(self, duration):
+def import_subscription_csv(self, dict):
     progress_recorder = ProgressRecorder(self)
-    for i in range(100):
-        sleep(duration)
-        progress_recorder.set_progress(i + 1, 100, f'On iteration {i}')
-    return 'Done'
+    sh = gc.open('Mad')
+    worksheet = sh.worksheet("Uge")
+    num_df = DataFrame.from_dict(dict)
+    num_df["Antal"] = pd.to_numeric(num_df["Antal"])
+    sales = num_df.groupby('Ret').sum()
+    sales = sales.reset_index()
+    progress= 0
+    for row in sales.itertuples():
+        progress = progress =+ 1
+        progress_recorder.set_progress(progress, len(sales.index))
+        try:
+            cell = worksheet.find(row.Ret)
+            time.sleep(1)
+            worksheet.update_cell(cell.row, cell.col+4, row.Antal)
+            print(row.Ret)
+        except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
+            print('Not found - ' +row.Ret)
 
 @shared_task(bind=True)
 def import_sales_csv(self, dict):
