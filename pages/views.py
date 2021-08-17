@@ -12,7 +12,7 @@ def index(request):
     if request.method == 'POST' and request.FILES['product-sales']:
         myfile = request.FILES['product-sales']
         df = pd.read_csv(myfile)
-        task = import_sales_csv.delay(df)
+        task = import_sales_csv.delay(df.to_dict())
         return render(request, 'home.html', {'task_id' : task.task_id})
 
     return render(request, 'home.html', {})

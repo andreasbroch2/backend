@@ -1,6 +1,8 @@
 from celery import shared_task
 from celery_progress.backend import ProgressRecorder
 from time import sleep
+
+from pandas.core.frame import DataFrame
 from .database import Database
 import numpy as np
 import pandas as pd
@@ -34,10 +36,11 @@ def go_to_sleep(self, duration):
     return 'Done'
 
 @shared_task(bind=True)
-def import_sales_csv(self, df):
+def import_sales_csv(self, dict):
     progress_recorder = ProgressRecorder(self)
     sh = gc.open('Mad')
     worksheet = sh.worksheet("Uge")
+    df = DataFrame.from_dict(dict)
     df = df.replace('–', '-', regex=True)
     for i, row in df.iterrows():
         print(row[0])
