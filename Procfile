@@ -1,2 +1,2 @@
 web: gunicorn mysite.wsgi
-worker: celery -A mysite -l
+celery: celery worker -A mysite -l info -c 4
