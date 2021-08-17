@@ -15,7 +15,8 @@ def index(request):
         task = import_sales_csv.delay(df.to_dict())
         return render(request, 'home.html', {'task_id' : task.task_id})
     elif 'subscription-sales' in request.FILES:
-        myfile = request.FILES['subscription-sales']
+        file = request.FILES['subscription-sales']
+        myfile = open(file, 'w+')
         lines = myfile.readlines()
         string = "order_items"
         for line in lines:
