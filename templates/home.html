@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+  <h1>Gaia's Awesome Backend Software</h1>
+  <div class="grid-50-50">
+    <div>
+      <h2>Upload Product Sales Report</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id="progress-bar-trigger" type="file" name="product-sales" />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+    <div>
+      <h2>Upload Subscription Sales</h2>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id="progress-bar-trigger" type="file" name="subscription-sales" />
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </div>
+  <div class="progress-wrapper">
+    <div id="progress-bar" class="progress-bar" style="background-color: #68a9ef; width: 0%">
+      &nbsp;
+    </div>
+  </div>
+  <div id="progress-bar-message">Waiting for progress to start...</div>
+</div>
+<script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+{% if task_id %}
+<script>
+  var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+
+  function customResult(resultElement, result) {
+    $(resultElement).append($("<p>").text("Sum of all seconds is " + result));
+  }
+
+  CeleryProgressBar.initProgressBar(progressUrl, {
+    onResult: customResult,
+  });
+</script>
+{% endif %}
+{% endblock %}
