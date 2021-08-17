@@ -24,7 +24,7 @@ def index(request):
                 lines.remove(line)
         print(lines)
         print(file)
-        csv = pd.DataFrame(lines)
+        csv = pd.read_table(lines, header=None, sep=",", names=list(range(40)))
         print(csv)
         df = pd.DataFrame(columns=['Ret', 'Antal'])
         print(df)
