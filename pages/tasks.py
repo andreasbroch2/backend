@@ -9,7 +9,7 @@ import time
 from oauth2client.service_account import ServiceAccountCredentials
 
 scope = ['https://www.googleapis.com/auth/spreadsheets']
-credentials = ServiceAccountCredentials.from_json_keyfile_name('.credentials.json', scope)
+credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
 
 gc = gspread.oauth()
 db = Database()
