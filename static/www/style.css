@@ -1,0 +1,28 @@
+*{
+    font-family: Quicksand;
+}
+.not-visible {
+    display: none;
+}
+
+#progress-bar {
+    margin-top: 1em;
+  }
+#progress-bar-message{
+    text-align: center;
+}
+.container{
+    padding: 50px
+}
+.grid-50-50{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+h1{
+    color: #063;
+    text-align: center;
+    margin: 20px 0
+}
+h2{
+    margin: 20px 0;
+}
