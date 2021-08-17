@@ -22,6 +22,7 @@ def index(request):
         for line in lines:
             if string in line:
                 lines.remove(line)
+        print(lines)
         print(file)
         csv = pd.read_table(file, header=None, sep=",", names=list(range(40)))
         df = pd.DataFrame(columns=['Ret', 'Antal'])
