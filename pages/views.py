@@ -16,14 +16,10 @@ def index(request):
         return render(request, 'home.html', {'task_id' : task.task_id})
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
-        print(file)
         lines = file.readlines()
-        print(lines)
         string = "order_items"
         string= string.encode('utf-8')
-        print(string)
         for line in lines:
-            print(line)
             if string in line:
                 lines.remove(line)
         csv = pd.read_table(file, header=None, sep=",", names=list(range(40)))
@@ -38,6 +34,7 @@ def index(request):
         # Eliminate invalid data from dataframe (see Example below for more context)
         num_df = (df.drop(['Antal'], axis=1).join(df['Antal'].apply(pd.to_numeric, errors='coerce')))
         num_df = num_df.dropna()
+        print('start task')
         task = import_subscription_csv.delay(num_df.to_dict())
         return render(request, 'home.html', {'task_id' : task.task_id})
 
