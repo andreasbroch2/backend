@@ -1,7 +1,7 @@
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
-
+import pandas as pd
 from .tasks import import_sales_csv
 
 def home_view(request, *args, **kvargs):
@@ -11,10 +11,8 @@ def home_view(request, *args, **kvargs):
 def index(request):
     if request.method == 'POST' and request.FILES['product-sales']:
         myfile = request.FILES['product-sales']
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name, myfile)
-        filepath = fs.location + '/' + filename
-        task = import_sales_csv.delay(filepath)
+        df = pd.read_csv(myfile)
+        task = import_sales_csv.delay(df)
         return render(request, 'home.html', {'task_id' : task.task_id})
 
     return render(request, 'home.html', {})

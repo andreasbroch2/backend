@@ -34,11 +34,10 @@ def go_to_sleep(self, duration):
     return 'Done'
 
 @shared_task(bind=True)
-def import_sales_csv(self, file):
+def import_sales_csv(self, df):
     progress_recorder = ProgressRecorder(self)
     sh = gc.open('Mad')
     worksheet = sh.worksheet("Uge")
-    df = pd.read_csv(file)
     df = df.replace('–', '-', regex=True)
     for i, row in df.iterrows():
         print(row[0])
