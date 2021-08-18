@@ -27,6 +27,7 @@ def index(request):
             if string in line:
                 lines.remove(line)
             else:
+                line = line.encode()
                 line.replace('"', '')
         print(lines)
         csv = pd.read_table(lines, header=None, sep=",", names=list(range(40)))
