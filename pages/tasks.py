@@ -33,7 +33,7 @@ def import_subscription_csv(self, dict):
     num_df["Antal"] = pd.to_numeric(num_df["Antal"])
     sales = num_df.groupby('Ret').sum()
     sales = sales.reset_index()
-    print(sales.index)
+    print(len(sales.index))
     progress= 0
     for row in sales.itertuples():
         progress = progress =+ 1
