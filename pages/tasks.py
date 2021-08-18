@@ -36,7 +36,8 @@ def import_subscription_csv(self, dict):
     print(len(sales.index))
     progress= 0
     for row in sales.itertuples():
-        progress = progress =+ 1
+        progress = progress + 1
+        print(progress)
         test = progress_recorder.set_progress(progress, len(sales.index))
         print(test)
         try:
