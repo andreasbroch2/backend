@@ -37,7 +37,8 @@ def import_subscription_csv(self, dict):
     progress= 0
     for row in sales.itertuples():
         progress = progress =+ 1
-        progress_recorder.set_progress(progress, len(sales.index))
+        test = progress_recorder.set_progress(progress, len(sales.index))
+        print(test)
         try:
             cell = worksheet.find(row.Ret)
             time.sleep(1)
