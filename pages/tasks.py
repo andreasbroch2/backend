@@ -26,16 +26,14 @@ db = Database()
 
 @shared_task(bind=True)
 def import_subscription_csv(self, dict):
-    print(dict)
     progress_recorder = ProgressRecorder(self)
     sh = gc.open('Mad')
     worksheet = sh.worksheet("Uge")
     num_df = DataFrame.from_dict(dict)
     num_df["Antal"] = pd.to_numeric(num_df["Antal"])
-    print(num_df)
     sales = num_df.groupby('Ret').sum()
     sales = sales.reset_index()
-    print(sales)
+    print(sales.index)
     progress= 0
     for row in sales.itertuples():
         progress = progress =+ 1
@@ -44,7 +42,6 @@ def import_subscription_csv(self, dict):
             cell = worksheet.find(row.Ret)
             time.sleep(1)
             worksheet.update_cell(cell.row, cell.col+4, row.Antal)
-            print(row.Ret)
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
             print('Not found - ' +row.Ret)
 
