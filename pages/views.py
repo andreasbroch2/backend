@@ -27,18 +27,14 @@ def index(request):
                 line = line.decode()
                 line = line.replace('"', '')
                 newlines.append(line)
-        print(newlines)
         csv = pd.DataFrame([sub.split(",") for sub in newlines])
-        print(csv)
         df = pd.DataFrame(columns=['Ret', 'Antal'])
 
         for column in csv:
-            print(column)
             if(column > 1):
                 if (column % 2) == 0:
                     xtra = pd.DataFrame(data=csv.iloc[:, [column, column+1]])
                     xtra.columns = ['Ret', 'Antal']
-                    print(xtra)
                     df = df.append(xtra, ignore_index=True)                             
         df = df.dropna()
         # Eliminate invalid data from dataframe (see Example below for more context)
