@@ -28,7 +28,7 @@ def index(request):
                 line = line.replace('"', '')
                 newlines.append(line)
         print(newlines)
-        csv = pd.DataFrame(newlines)
+        csv = pd.DataFrame([sub.split(",") for sub in newlines])
         print(csv)
         df = pd.DataFrame(columns=['Ret', 'Antal'])
 
