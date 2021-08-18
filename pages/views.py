@@ -17,6 +17,9 @@ def index(request):
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
+        print(lines)
+        linesdf = pd.DataFrame(lines)
+        print(linesdf)
         string = "order_items"
         string= string.encode('utf-8')
         for line in lines:
