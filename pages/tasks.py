@@ -37,9 +37,7 @@ def import_subscription_csv(self, dict):
     progress= 0
     for row in sales.itertuples():
         progress = progress + 1
-        print(progress)
-        test = progress_recorder.set_progress(progress, len(sales.index))
-        print(test)
+        progress_recorder.set_progress(progress, len(sales.index))
         try:
             cell = worksheet.find(row.Ret)
             time.sleep(1)
@@ -57,7 +55,7 @@ def import_sales_csv(self, dict):
     progress = 0
     for index, row in df.iterrows():
         print(row[0])
-        progress = progress =+ 1
+        progress = progress + 1
         progress_recorder.set_progress(progress, len(df.index))
         try:
             cell = worksheet.find(row[0])
