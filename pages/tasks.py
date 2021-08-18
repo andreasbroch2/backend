@@ -44,6 +44,7 @@ def import_subscription_csv(self, dict):
             worksheet.update_cell(cell.row, cell.col+4, row.Antal)
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
             print('Not found - ' +row.Ret)
+    return 'Done'
 
 @shared_task(bind=True)
 def import_sales_csv(self, dict):
