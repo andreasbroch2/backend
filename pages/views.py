@@ -17,9 +17,7 @@ def index(request):
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
-        print(lines)
         linesdf = pd.DataFrame(lines)
-        print(linesdf)
         string = "order_items"
         string= string.encode('utf-8')
         for line in lines:
@@ -28,10 +26,11 @@ def index(request):
                 lines.remove(line)
             else:
                 line = line.decode()
-                line.replace('"', '')
+                line = line.replace('"', '')
+                print(line)
         print(lines)
-        csv = pd.read_table(lines, header=None, sep=",", names=list(range(40)))
-
+        csv = pd.DataFrame(lines)
+        print(csv)
         df = pd.DataFrame(columns=['Ret', 'Antal'])
 
         for column in csv:
