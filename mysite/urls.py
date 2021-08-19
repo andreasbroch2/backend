@@ -20,7 +20,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from pages import views
-from recipe.views import recipes
+from recipe import views as recipeviews
 
 urlpatterns = [
     path('', include('pages.urls')),
@@ -28,7 +28,7 @@ urlpatterns = [
     path('opskrifter/', views.opskrifter, name='opskrifter'),
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
-    path('recipes/', recipes, name="recipes")
+    path('recipes/', recipeviews.recipes, name="recipes")
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
