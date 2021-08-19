@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Own
 
     'ingredients',
+    'recipe',
     'pages',
 ]
 
