@@ -47,3 +47,6 @@ def index(request):
             })
 
     return render(request, 'home.html', {})
+
+def opskrifter(request):
+    return render(request, 'opskrifter.html')
