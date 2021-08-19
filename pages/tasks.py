@@ -3,6 +3,7 @@ from celery_progress.backend import ProgressRecorder
 from time import sleep
 import pandas as pd
 from pandas.core.frame import DataFrame
+from django.shortcuts import render
 from .database import Database
 import gspread
 import time
@@ -35,6 +36,7 @@ def import_subscription_csv(self, dict):
     sales = sales.reset_index()
     print(len(sales.index))
     progress= 0
+    missing = []
     for row in sales.itertuples():
         progress = progress + 1
         progress_recorder.set_progress(progress, len(sales.index))
@@ -44,7 +46,8 @@ def import_subscription_csv(self, dict):
             worksheet.update_cell(cell.row, cell.col+4, row.Antal)
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
             print('Not found - ' +row.Ret)
-    return 'Done'
+            missing.append(row.Ret + ' - ' + row.Antal )
+    return missing
 
 @shared_task(bind=True)
 def import_sales_csv(self, dict):

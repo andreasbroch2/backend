@@ -42,6 +42,8 @@ def index(request):
         num_df = num_df.dropna()
         # print(num_df)
         task = import_subscription_csv.delay(num_df.to_dict())
-        return render(request, 'home.html', {'task_id' : task.task_id})
+        return render(request, 'home.html', {
+            'task_id' : task.task_id
+            })
 
     return render(request, 'home.html', {})
