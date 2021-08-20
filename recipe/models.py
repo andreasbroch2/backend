@@ -15,8 +15,6 @@ class Recipe(models.Model):
     summary = models.TextField(default="This is cool")
     date_created = models.DateField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    objects = RecipeManager()
     
     def __str__(self):
         return self.name
