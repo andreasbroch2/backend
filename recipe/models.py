@@ -9,4 +9,4 @@ class Recipe(models.Model):
     method = models.JSONField()
     summary = models.TextField(default="This is cool")
     date_created = models.DateField(default=timezone.now)
-    author = models.ForeignKey(User)
+    author = models.TextField(User)
