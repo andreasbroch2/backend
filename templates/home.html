@@ -35,7 +35,7 @@
   var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
 
   function customResult(resultElement, result) {
-    $(resultElement).append($("<p>").text("Sum of all seconds is " + result));
+    $(resultElement).append($("<p>").text("Ikke fundne linjer: \n" + result));
   }
 
   CeleryProgressBar.initProgressBar(progressUrl, {
