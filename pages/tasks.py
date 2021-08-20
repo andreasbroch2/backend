@@ -3,8 +3,6 @@ from celery_progress.backend import ProgressRecorder
 from time import sleep
 import pandas as pd
 from pandas.core.frame import DataFrame
-from django.shortcuts import render
-from mysite.database import Database
 import gspread
 import time
 
@@ -22,7 +20,6 @@ credentials = {
   }
 
 gc = gspread.service_account_from_dict(credentials)
-db = Database()
 
 
 @shared_task(bind=True)
