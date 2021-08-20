@@ -3,6 +3,14 @@ from .config import Config
 import MySQLdb as mdb
 import pandas as pd
 
+def ssh():
+    SSHTunnelForwarder(
+        (Config.DATABASE_CONFIG['ssh-server'], Config.DATABASE_CONFIG['ssh-port']),
+        ssh_username=Config.DATABASE_CONFIG['user'],
+        ssh_password=Config.DATABASE_CONFIG['ssh-password'],
+        remote_bind_address=(Config.DATABASE_CONFIG['server'], Config.DATABASE_CONFIG['port']))
+    
+
 class Database:
 
     server = SSHTunnelForwarder(
@@ -10,6 +18,12 @@ class Database:
         ssh_username=Config.DATABASE_CONFIG['user'],
         ssh_password=Config.DATABASE_CONFIG['ssh-password'],
         remote_bind_address=(Config.DATABASE_CONFIG['server'], Config.DATABASE_CONFIG['port']))
+    con = mdb.connect(
+            Config.DATABASE_CONFIG['server'],
+            Config.DATABASE_CONFIG['user'],
+            Config.DATABASE_CONFIG['password'],
+            Config.DATABASE_CONFIG['name'], 
+            port=server.local_bind_port)
 
     def __init__(self):
         pass 

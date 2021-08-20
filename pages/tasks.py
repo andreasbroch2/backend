@@ -4,7 +4,7 @@ from time import sleep
 import pandas as pd
 from pandas.core.frame import DataFrame
 from django.shortcuts import render
-from .database import Database
+from mysite.database import Database
 import gspread
 import time
 
