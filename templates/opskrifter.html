@@ -4,8 +4,13 @@
   <div class="recipes">
     {% for recipe in recipes %}
     <div class="recipe">
-      {{ recipe.name }} {recipe.type} {recipe.ingredients} {recipe.method}
-      {recipe.summery} {recipe.date_created} {recipe.author}
+      {{ recipe.name }} 
+      {{ recipe.type }}
+      {{ recipe.ingredients }} 
+      {{ recipe.method }}
+      {{ recipe.summery }} 
+      {{ recipe.date_created }} 
+      {{ recipe.author }}
     </div>
     {% endfor %}
   </div>
