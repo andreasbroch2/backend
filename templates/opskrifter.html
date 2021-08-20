@@ -1,6 +1,14 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 <div class="container">
-  <h1>Gaia's Awesome Backend Software</h1>
+  <h1>Opskrifter</h1>
+  <div class="recipes">
+    {% for recipe in recipes %}
+    <div class="recipe">
+      {recipe.name} {recipe.type} {recipe.ingredients} {recipe.method}
+      {recipe.summery} {recipe.date_created} {recipe.author}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 {% endblock %}
