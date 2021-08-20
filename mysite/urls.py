@@ -28,7 +28,7 @@ urlpatterns = [
     path('opskrifter/', views.opskrifter, name='opskrifter'),
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
-    path('recipes/', recipeviews.recipes, name="recipes")
+    path('recipes/', recipeviews.recipes, name="recipes"), 
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
