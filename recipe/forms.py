@@ -16,5 +16,5 @@ class RecipeForm(forms.ModelForm):
         fields = [
             'title',
             'type',
-            'description'
+            'summary'
         ]
