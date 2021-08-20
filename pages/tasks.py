@@ -43,7 +43,7 @@ def import_subscription_csv(self, dict):
             worksheet.update_cell(cell.row, cell.col+4, row.Antal)
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
             print('Not found - ' +row.Ret)
-            missing.append(row.Ret + ' - ' + str(row.Antal) + '\n')
+            missing.append(row.Ret + ' - ' + str(row.Antal) + ' \n')
     return missing
 
 @shared_task(bind=True)
@@ -54,6 +54,7 @@ def import_sales_csv(self, dict):
     df = DataFrame.from_dict(dict)
     df = df.replace('–', '-', regex=True)
     progress = 0
+    missing = []
     for index, row in df.iterrows():
         print(row[0])
         progress = progress + 1
@@ -64,5 +65,5 @@ def import_sales_csv(self, dict):
             time.sleep(1)
             worksheet.update_cell(cell.row, cell.col+1, row[1])
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
-            print('Not found')
-    return 'Done'
+             missing.append(row[0] + ' - ' + str(row[1]) + '\n')
+    return missing
