@@ -53,6 +53,7 @@ def import_sales_csv(self, dict):
     worksheet = sh.worksheet("Uge")
     df = DataFrame.from_dict(dict)
     df = df.replace('–', '-', regex=True)
+    df = df.replace('’', '\'', regex=True)
     progress = 0
     missing = []
     for index, row in df.iterrows():
