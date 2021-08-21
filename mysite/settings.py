@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'celery_progress',
     # Own
 
-    'ingredients',
     'recipe',
     'pages',
 ]
