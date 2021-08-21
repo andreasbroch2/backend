@@ -21,14 +21,12 @@ from pages import views
 from recipe import views as recipeviews
 
 urlpatterns = [
-    path('', include('pages.urls')),
+        #recipes part of the site
+    path(r'', include('recipes.urls')),
     path('home/', views.home_view, name='home'),
     path('opskrifter/', views.opskrifter, name='opskrifter'),
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
-    path('recipes/', recipeviews.recipes, name="recipes"), 
-    path('create-recipe/', recipeviews.recipe_create_view, name="create-recipe"),
-    path('add-ingredients/<int:id>', recipeviews.recipe_add_ingredients_view, name="add-ingredients")
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
