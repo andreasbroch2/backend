@@ -1,0 +1,151 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+	<script type="text/javascript"></script>
+	<title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css">
+	<link rel="stylesheet" href="{% static 'test.css' %}">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{% static 'ms-icon-144x144.png' %}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+	<div class="container">
+
+		<div class="page-header hidden-print">
+		  <h1><a href="{% url 'recipe-home' %}">Dave's Recipes</a></h1>
+		</div>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+	<li><a href="{% url 'recipe-home' %}">Home</a></li>
+	<li><a href="{% url 'recipe-list' %}">Recipes</a></li>
+	<li><a href="{% url 'food-conversion-list' %}">Weight Conversions</a></li>
+    </ul>
+    <!--
+    <ul class="nav navbar-nav navbar-right">
+	{% if user.is_authenticated %}
+	  <li><a href="/admin/logout">Logout</a></li>
+	{% else %}
+	  <li><a href="/admin">Login</a></li>
+	{% endif %}
+
+    </ul>
+    -->
+  </div><!-- /.navbar-collapse -->
+</nav>
+
+<div class="row">
+  <div class="col-md-1">
+	  <!--
+    <h2>Categories</h2>
+			<ul>
+				{% for category in categories_list %}
+				<li><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></li>
+				{% endfor %}
+			</ul>
+
+			<h2>Newest Recipes</h2>
+			<ul>
+				{% for recipe in recipes_new_list %}
+				<li><a href="{{ recipe.get_absolute_url }}">{{ recipe.title }}</a></li>
+				{% endfor %}
+			</ul>
+
+			<h2>Recently Modified</h2>
+			<ul>
+				{% for recipe in recipes_changed_list %}
+				<li><a href="{{ recipe.get_absolute_url }}">{{ recipe.title }}</a></li>
+				{% endfor %}
+			</ul>
+			-->
+  </div>
+  <div class="col-md-10">
+    {% block content %}{% endblock %}
+  </div>
+  <div class="col-md-1"/>
+
+</div>
+
+<div class="row hidden-print">
+  <div class="col-md-12">
+	  <p class="text-center small">Thanks for visiting my site. Django version: {{ django_version }}<br />
+         Source code is licensed under the GPLv2 and available at <a href="https://github.com/dgrant/django_recipes">https://github.com/dgrant/django_recipes</a></p>
+  </div>
+</div>
+		
+
+</div>
+
+	<script src="//code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+	    $(document).ready(function() {
+		$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	    }); 
+
+        $(document).ready(function() {
+            $("input:checkbox").click(function() {
+                elem = $(this).parent().next().find('.canstrike');
+                if ($(this).is(':checked')) {
+                    elem.css('text-decoration', 'line-through');
+                    elem.css('color', 'grey');
+                }
+                else {
+                    elem.removeAttr('style');
+                    elem.removeAttr('style');
+                }
+           });
+        });
+
+	</script>
+
+</body>
+
+
+
+</body>
+</html>

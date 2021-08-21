@@ -7,7 +7,7 @@ class RecipeManager(models.Manager):
         return recipe
 
 class Ingredient(models.Model):
-    name = models.CharField
+    name = models.CharField(max_length=120, default="Kartofl")
 
 class Recipe(models.Model):
     name = models.CharField(max_length=120)
