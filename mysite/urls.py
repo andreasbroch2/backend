@@ -18,12 +18,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from pages import views
-from recipe import views as recipeviews
 
 urlpatterns = [
         #recipes part of the site
     path(r'', include('recipes.urls')),
-    path('home/', views.home_view, name='home'),
+    path('/', views.home_view, name='home'),
     path('opskrifter/', views.opskrifter, name='opskrifter'),
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
