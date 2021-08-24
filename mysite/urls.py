@@ -22,7 +22,7 @@ from pages import views
 urlpatterns = [
         #recipes part of the site
     path(r'', include('recipes.urls')),
-    path('', views.home_view, name='home'),
+    path('', views.index, name='home'),
     path('opskrifter/', views.opskrifter, name='opskrifter'),
     path('admin/', admin.site.urls),
     path('celery-progress/', include('celery_progress.urls')),
