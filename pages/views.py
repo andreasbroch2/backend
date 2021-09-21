@@ -68,15 +68,15 @@ def index(request):
         rows = val.get('values', [])
         df = pd.DataFrame(rows)
         smtp = SMTP()
+        status = ''
         try:
             smtp.set_debuglevel(1)
             smtp.connect('mail.dandomain.dk', 366)
             print('Connect')
             try:
                 smtp.login('andreas@gaiamadservice.dk', '17129223Ab')
-                print('Login')
             except:
-                print('Error: Unable to login')
+                status = 'Error: Unable to login'
             from_addr = "Andreas Broch <sri@gaiamadservice.dk>"
             to_addr = "andreas@gaiamadservice.dk"
             message_subject = "disturbance in sector 7"
@@ -86,12 +86,12 @@ def index(request):
             {}""".format(df.to_string())
             smtp.sendmail(from_addr, to_addr, message)
             smtp.quit()     
-            print("Successfully sent email")
+            status = "Successfully sent email"
         except:
-            print ("Error: unable to connect")
+            status = "Error: unable to connect"
         return render(request, 'home.html', {
             'df' : str(df),
-            'test' : 'test'
+            'status' : status
         })
     return render(request, 'home.html', {})
 
