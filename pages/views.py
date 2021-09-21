@@ -48,6 +48,7 @@ def index(request):
     elif 'juice' in request.POST:
         task = get_juice.delay()
         return render(request, 'home.html', {})
+    return render(request, 'home.html', {})
 
 def opskrifter(request):
     return render(request, 'opskrifter.html')
