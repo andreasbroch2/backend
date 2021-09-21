@@ -71,7 +71,7 @@ def import_sales_csv(self, dict):
     return missing
 
 @shared_task(bind=True)
-def get_juice():
+def get_juice(self):
     sh = gc.open('Mad')
     val = sh.values_get("Uge!A62:F69")
     rows = val.get('values', [])
