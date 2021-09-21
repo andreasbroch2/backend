@@ -88,7 +88,7 @@ def index(request):
             message['From'] = '<Andreas>sri@gaiamadservice.dk'
             message['To'] = 'andreas@gaiamadservice.dk'
 
-            body_content = """
+            body_content = """\
             <html>
             <head></head>
             <body>
@@ -103,8 +103,8 @@ def index(request):
             test = '3'
             smtp.quit()
             status = "Successfully sent email"
-        except:
-            status = "Error: unable to connect"
+        except Exception as e:
+            status = e
         return render(request, 'home.html', {
             'df' : str(df),
             'status' : status,
