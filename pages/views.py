@@ -85,7 +85,7 @@ def index(request):
 
             TEXT="""
             <h1>Hello</h1>
-            {}""".format(df.to_html())
+            """
 
             message = f"Subject: {SUBJECT}\nFrom: {FROM}\nTo: {TO}\nContent-Type: text/html\n\n{TEXT}"
             
