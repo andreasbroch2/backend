@@ -83,9 +83,14 @@ def index(request):
             TO = "andreas@gaiamadservice.dk"
             SUBJECT= "Juice Order - Gaia"
 
-            TEXT="""
-            <h1>Hello</h1>
-            """
+            TEXT="""\
+            <html>
+            <head></head>
+            <body>
+                {0}
+            </body>
+            </html>
+            """.format(df.to_html())
 
             message = f"Subject: {SUBJECT}\nFrom: {FROM}\nTo: {TO}\nContent-Type: text/html\n\n{TEXT}"
             
