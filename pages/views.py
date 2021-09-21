@@ -85,7 +85,7 @@ def index(request):
             message = MIMEMultipart()
             test = '1'
             message['Subject'] = 'Juice order - Gaia'
-            message['From'] = '<Andreas>sri@gaiamadservice.dk'
+            message['From'] = 'sri@gaiamadservice.dk'
             message['To'] = 'andreas@gaiamadservice.dk'
 
             body_content = """\
