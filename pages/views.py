@@ -82,8 +82,6 @@ def index(request):
             message_subject = "disturbance in sector 7"
             message_text = "Three are dead in an attack in the sewers below sector 7."
             message = """From: Andreas Broch <sri@gaiamadservice.dk>\n
-            To: <andreas@gaiamadservice.dk>\n 
-            Subject: Test af Python\n
             Dette er en autogeneret email med vores bestilling af juice. Hej.
             {}""".format(df.to_string())
             smtp.sendmail(from_addr, to_addr, message)
@@ -92,7 +90,7 @@ def index(request):
         except:
             print ("Error: unable to connect")
         return render(request, 'home.html', {
-            'df' : df.to_string(),
+            'df' : str(df),
             'test' : 'test'
         })
     return render(request, 'home.html', {})
