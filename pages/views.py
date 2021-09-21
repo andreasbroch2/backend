@@ -69,6 +69,7 @@ def index(request):
         val = sh.values_get("Uge!A62:F69")
         rows = val.get('values', [])
         df = pd.DataFrame(rows)
+        del df[1,2,3,4]
         smtp = SMTP()
         status = ''
         loginstatus = ''
@@ -83,7 +84,7 @@ def index(request):
                 loginstatus = 'Error: Unable to login'    
             message = MIMEMultipart()
             message['Subject'] = 'Juice order - Gaia'
-            message['From'] = 'sri@gaiamadservice.dk'
+            message['From'] = 'andreas@gaiamadservice.dk'
             message['To'] = 'andreas@gaiamadservice.dk'
 
             body_content = """\
@@ -105,7 +106,7 @@ def index(request):
         except Exception as e:
             status = e
         return render(request, 'home.html', {
-            'df' : str(df),
+            'df' : df.to_html(),
             'status' : status,
             'login' : loginstatus,
         })
