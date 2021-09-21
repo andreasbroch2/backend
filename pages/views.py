@@ -85,7 +85,7 @@ def index(request):
             To: <andreas@gaiamadservice.dk>\n 
             Subject: Test af Python\n
             Dette er en autogeneret email med vores bestilling af juice. Hej.
-            """.format(df.to_string())
+            {}""".format(df.to_string())
             smtp.sendmail(from_addr, to_addr, message)
             smtp.quit()     
             print("Successfully sent email")
