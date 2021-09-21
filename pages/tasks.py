@@ -92,7 +92,7 @@ def get_juice(self):
         message_text = "Three are dead in an attack in the sewers below sector 7."
         message = """From: Andreas Broch <sri@gaiamadservice.dk> To: <andreas@gaiamadservice.dk> Subject: Test af Python\n
         Hej med dig din smukke satan
-        """
+        """.format(df.to_html())
         smtp.sendmail(from_addr, to_addr, message)
         smtp.quit()     
         print("Successfully sent email")
