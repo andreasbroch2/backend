@@ -90,9 +90,11 @@ def get_juice(self):
         to_addr = "andreas@gaiamadservice.dk"
         message_subject = "disturbance in sector 7"
         message_text = "Three are dead in an attack in the sewers below sector 7."
-        message = """From: Andreas Broch <sri@gaiamadservice.dk> To: <andreas@gaiamadservice.dk> Subject: Test af Python\n
-        Hej med dig din smukke satan
-        """.format(df.to_html())
+        message = """From: Andreas Broch <sri@gaiamadservice.dk>\n
+        To: <andreas@gaiamadservice.dk>\n 
+        Subject: Test af Python\n
+        Dette er en autogeneret email med vores bestilling af juice. Hej.
+        """.format(df.to_string())
         smtp.sendmail(from_addr, to_addr, message)
         smtp.quit()     
         print("Successfully sent email")
