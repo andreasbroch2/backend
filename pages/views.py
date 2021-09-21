@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pandas as pd
 from .tasks import import_sales_csv, import_subscription_csv, get_juice
+import gspread
+from smtplib import SMTP
 
 def home_view(request, *args, **kvargs):
     return render(request, "home.html", {})
@@ -46,10 +48,36 @@ def index(request):
             'task_id' : task.task_id
             })
     elif 'juice' in request.POST:
-        task = get_juice.delay()
-        dfstring = task.to_string()
+        sh = gc.open('Mad')
+        val = sh.values_get("Uge!A62:F69")
+        rows = val.get('values', [])
+        df = pd.DataFrame(rows)
+        smtp = SMTP()
+        try:
+            smtp.set_debuglevel(1)
+            smtp.connect('mail.dandomain.dk', 366)
+            print('Connect')
+            try:
+                smtp.login('andreas@gaiamadservice.dk', '17129223Ab')
+                print('Login')
+            except:
+                print('Error: Unable to login')
+            from_addr = "Andreas Broch <sri@gaiamadservice.dk>"
+            to_addr = "andreas@gaiamadservice.dk"
+            message_subject = "disturbance in sector 7"
+            message_text = "Three are dead in an attack in the sewers below sector 7."
+            message = """From: Andreas Broch <sri@gaiamadservice.dk>\n
+            To: <andreas@gaiamadservice.dk>\n 
+            Subject: Test af Python\n
+            Dette er en autogeneret email med vores bestilling af juice. Hej.
+            """.format(df.to_string())
+            smtp.sendmail(from_addr, to_addr, message)
+            smtp.quit()     
+            print("Successfully sent email")
+        except:
+            print ("Error: unable to connect")
         return render(request, 'home.html', {
-            'df' : dfstring,
+            'df' : df.to_string(),
             'test' : 'test'
         })
     return render(request, 'home.html', {})
