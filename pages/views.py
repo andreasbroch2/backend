@@ -72,7 +72,6 @@ def index(request):
         smtp = SMTP()
         status = ''
         loginstatus = ''
-        test = ''
         try:
             smtp.set_debuglevel(1)
             smtp.connect('mail.dandomain.dk', 366)
@@ -83,7 +82,6 @@ def index(request):
             except:
                 loginstatus = 'Error: Unable to login'    
             message = MIMEMultipart()
-            test = '1'
             message['Subject'] = 'Juice order - Gaia'
             message['From'] = 'sri@gaiamadservice.dk'
             message['To'] = 'andreas@gaiamadservice.dk'
@@ -92,15 +90,16 @@ def index(request):
             <html>
             <head></head>
             <body>
+                <h1>Juice order - Gaia</h1>
+                <p>Hej med dig</p>
+                <p>Dette er en test af vores automatiske juice bestillingssysstem. Se i tabellen nedenfor hvor mange juice vi skal have.</p>
                 {0}
             </body>
             </html>
             """.format(df.to_html())
             message.attach(MIMEText(body_content, "html"))
             msg_body = message.as_string()
-            test = '2'
             smtp.sendmail(message['From'], message['To'], msg_body)
-            test = '3'
             smtp.quit()
             status = "Successfully sent email"
         except Exception as e:
@@ -109,7 +108,6 @@ def index(request):
             'df' : str(df),
             'status' : status,
             'login' : loginstatus,
-            'test' : test
         })
     return render(request, 'home.html', {})
 
