@@ -89,7 +89,7 @@ def index(request):
             message = MIMEMultipart()
             message['Subject'] = 'Juice order - Gaia'
             message['From'] = 'andreas@gaiamadservice.dk'
-            message['To'] = 'andreas@gaiamadservice.dk'
+            message['To'] = 'asger@gaiamadservice.dk'
 
             body_content = """\
             <html>
