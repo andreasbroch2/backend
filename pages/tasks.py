@@ -1,6 +1,7 @@
 from celery import shared_task
 from celery_progress.backend import ProgressRecorder
 from time import sleep
+from smtplib import SMTP
 import pandas as pd
 from pandas.core.frame import DataFrame
 import gspread
@@ -68,3 +69,33 @@ def import_sales_csv(self, dict):
         except gspread.exceptions.CellNotFound:  # or except gspread.CellNotFound:
              missing.append(row[0] + ' - ' + str(row[1]) + '\n')
     return missing
+
+@shared_task(bind=True)
+def get_juice():
+    sh = gc.open('Mad')
+    val = sh.values_get("Uge!A62:F69")
+    rows = val.get('values', [])
+    df = pd.DataFrame(rows)
+    smtp = SMTP()
+    try:
+        smtp.set_debuglevel(1)
+        smtp.connect('mail.dandomain.dk', 366)
+        print('Connect')
+        try:
+            smtp.login('andreas@gaiamadservice.dk', '17129223Ab')
+            print('Login')
+        except:
+            print('Error: Unable to login')
+        from_addr = "Andreas Broch <sri@gaiamadservice.dk>"
+        to_addr = "andreas@gaiamadservice.dk"
+        message_subject = "disturbance in sector 7"
+        message_text = "Three are dead in an attack in the sewers below sector 7."
+        message = """From: Andreas Broch <sri@gaiamadservice.dk> To: <andreas@gaiamadservice.dk> Subject: Test af Python\n
+        Hej med dig din smukke satan
+        """
+        smtp.sendmail(from_addr, to_addr, message)
+        smtp.quit()     
+        print("Successfully sent email")
+    except:
+        print ("Error: unable to connect")
+    return df

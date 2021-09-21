@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import pandas as pd
-from .tasks import import_sales_csv, import_subscription_csv
+from .tasks import import_sales_csv, import_subscription_csv, get_juice
 
 def home_view(request, *args, **kvargs):
     return render(request, "home.html", {})
@@ -45,8 +45,9 @@ def index(request):
         return render(request, 'home.html', {
             'task_id' : task.task_id
             })
-
-    return render(request, 'home.html', {})
+    elif 'juice' in request.POST:
+        task = get_juice.delay()
+        return render(request, 'home.html', {})
 
 def opskrifter(request):
     return render(request, 'opskrifter.html')

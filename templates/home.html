@@ -30,7 +30,10 @@
   <div id="progress-bar-message">Waiting for progress to start...</div>
   <div id="celery-result"></div>
   {% endif %}
-  <button>Bestil Juice</button>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="submit" name="juice">Bestil Juice</button>
+  </form>
 </div>
 {% if task_id %}
 <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
