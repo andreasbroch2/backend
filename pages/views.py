@@ -83,7 +83,7 @@ def index(request):
             TO = "andreas@gaiamadservice.dk"
             SUBJECT= "Juice Order - Gaia"
 
-            TEXT="""\
+            TEXT="""
             <html>
             <head></head>
             <body>
