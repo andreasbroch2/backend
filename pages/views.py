@@ -69,10 +69,10 @@ def index(request):
         val = sh.values_get("Uge!A62:F69")
         rows = val.get('values', [])
         df = pd.DataFrame(rows)
-        del df['1']
-        del df['2']
-        del df['3']
-        del df['4']
+        del df[1]
+        del df[2]
+        del df[3]
+        del df[4]
         df.columns = ['Product', 'Quantity']
         smtp = SMTP()
         status = ''
