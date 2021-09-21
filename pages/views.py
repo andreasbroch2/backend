@@ -5,6 +5,8 @@ import pandas as pd
 from .tasks import import_sales_csv, import_subscription_csv, get_juice
 import gspread
 from smtplib import SMTP
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 credentials = {
     "type": "service_account",
@@ -78,12 +80,13 @@ def index(request):
                 smtp.login('andreas@gaiamadservice.dk', '17129223Ab')
                 loginstatus = 'Succesfull Login'
             except:
-                loginstatus = 'Error: Unable to login'
-            FROM = "sri@gaiamadservice.dk"
-            TO = "andreas@gaiamadservice.dk"
-            SUBJECT= "Juice Order - Gaia"
+                loginstatus = 'Error: Unable to login'    
+            message = MIMEMultipart()
+            message['Subject'] = 'Juice order - Gaia'
+            message['From'] = '<Andreas>sri@gaiamadservice.dk'
+            message['To'] = 'andreas@gaiamadservice.dk'
 
-            TEXT="""
+            body_content = """
             <html>
             <head></head>
             <body>
@@ -91,11 +94,10 @@ def index(request):
             </body>
             </html>
             """.format(df.to_html())
-
-            message = f"Subject: {SUBJECT}\nFrom: {FROM}\nTo: {TO}\nContent-Type: text/html\n\n{TEXT}"
-            
-            smtp.sendmail(FROM, TO, message)
-            smtp.quit()     
+            message.attach(MIMEText(body_content, "html"))
+            msg_body = message.as_string()
+            smtp.sendmail(message['From'], message['To'], msg_body)
+            smtp.quit()
             status = "Successfully sent email"
         except:
             status = "Error: unable to connect"
