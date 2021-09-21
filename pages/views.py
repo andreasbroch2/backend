@@ -69,7 +69,7 @@ def index(request):
         val = sh.values_get("Uge!A62:F69")
         rows = val.get('values', [])
         df = pd.DataFrame(rows)
-        del df[1,2,3,4]
+        del df[1]
         smtp = SMTP()
         status = ''
         loginstatus = ''
@@ -97,7 +97,7 @@ def index(request):
                 {0}
             </body>
             </html>
-            """.format(df.to_html())
+            """.format(df.to_html(index=False))
             message.attach(MIMEText(body_content, "html"))
             msg_body = message.as_string()
             smtp.sendmail(message['From'], message['To'], msg_body)
@@ -106,7 +106,7 @@ def index(request):
         except Exception as e:
             status = e
         return render(request, 'home.html', {
-            'df' : df.to_html(),
+            'df' : df.to_html(index=False),
             'status' : status,
             'login' : loginstatus,
         })
