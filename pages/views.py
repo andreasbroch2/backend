@@ -47,7 +47,11 @@ def index(request):
             })
     elif 'juice' in request.POST:
         task = get_juice.delay()
-        return render(request, 'home.html', {})
+        dfstring = task.to_string()
+        return render(request, 'home.html', {
+            'df' : dfstring,
+            'test' : 'test'
+        })
     return render(request, 'home.html', {})
 
 def opskrifter(request):
