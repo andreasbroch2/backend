@@ -79,14 +79,17 @@ def index(request):
                 loginstatus = 'Succesfull Login'
             except:
                 loginstatus = 'Error: Unable to login'
-            from_addr = "Andreas Broch <sri@gaiamadservice.dk>"
-            to_addr = "andreas@gaiamadservice.dk"
-            message_subject = "disturbance in sector 7"
-            message_text = "Three are dead in an attack in the sewers below sector 7."
-            message = """From: Andreas Broch <sri@gaiamadservice.dk>\n
-            Dette er en autogeneret email med vores bestilling af juice. Hej.
-            {}""".format(df.to_string())
-            smtp.sendmail(from_addr, to_addr, message)
+            FROM = "sri@gaiamadservice.dk"
+            TO = "andreas@gaiamadservice.dk"
+            SUBJECT= "Juice Order - Gaia"
+
+            TEXT="""
+            <h1>Hello</h1>
+            {}""".format(df.to_html())
+
+            message = f"Subject: {SUBJECT}\nFrom: {FROM}\nTo: {TO}\nContent-Type: text/html\n\n{TEXT}"
+            
+            smtp.sendmail(FROM, TO, message)
             smtp.quit()     
             status = "Successfully sent email"
         except:
