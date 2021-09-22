@@ -88,16 +88,16 @@ def index(request):
                 loginstatus = 'Error: Unable to login'    
             message = MIMEMultipart()
             message['Subject'] = 'Juice order - Gaia'
-            message['From'] = 'andreas@gaiamadservice.dk'
-            message['To'] = 'asger@gaiamadservice.dk'
+            message['From'] = 'Gaia <andreas@gaiamadservice.dk>'
+            message['To'] = 'sri@gaiamadservice.dk, andreas@gaiamadservice.dk'
 
             body_content = """\
             <html>
             <head></head>
             <body>
                 <h1>Juice order - Gaia</h1>
-                <p>Hej med dig</p>
-                <p>Dette er en test af vores automatiske juice bestillingssysstem. Se i tabellen nedenfor hvor mange juice vi skal have.</p>
+                <p>Hello Marian</p>
+                <p>This is an automated email, so we may never forget to order again. Please let me know if anything looks off.</p>
                 {0}
             </body>
             </html>
