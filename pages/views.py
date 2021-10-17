@@ -40,6 +40,7 @@ def index(request):
             'df': df.to_html(index=False),
             'obs': obs
             })
+            
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
