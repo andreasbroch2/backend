@@ -32,7 +32,10 @@ def index(request):
         myfile = request.FILES['product-sales']
         df = pd.read_csv(myfile)
         task = import_sales_csv.delay(df.to_dict())
-        return render(request, 'home.html', {'task_id' : task.task_id})
+        return render(request, 'home.html', {
+            'task_id' : task.task_id,
+            'df': df.to_html(index=False)
+            })
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
@@ -63,7 +66,7 @@ def index(request):
         task = import_subscription_csv.delay(num_df.to_dict())
         return render(request, 'home.html', {
             'task_id' : task.task_id,
-            'df': df.to_html(index=False)
+            'df': num_df.to_html(index=False)
             })
     elif 'juice' in request.POST:
         sh = gc.open('Mad')

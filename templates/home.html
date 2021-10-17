@@ -34,12 +34,15 @@
     {% csrf_token %}
     <button type="submit" name="juice">Bestil Juice</button>
   </form>
+  {% if df %}
   <div class="df">
+    Dette er blevet importeret. Dobbelttjek venligst :) 
     {{ df |safe }}
     {{ status }}
     {{ login }}
     
   </div>
+  {% endif %}
 </div>
 {% if task_id %}
 <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
@@ -47,7 +50,7 @@
   var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
 
   function customResult(resultElement, result) {
-    $(resultElement).append($("<p>").text("Ikke fundne linjer: \n" + result));
+    $(resultElement).append($("<p>").html("<h2>Ikke fundne linjer: </h2><br>" + result));
   }
 
   CeleryProgressBar.initProgressBar(progressUrl, {
