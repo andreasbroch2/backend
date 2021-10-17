@@ -34,7 +34,7 @@ def index(request):
         task = import_sales_csv.delay(df.to_dict())
         obs = ''
         if len(df.index) < 70:
-            obs = '<br><h2>OBS! Der er færre end 70 linjer, du har nok gjort noget forkert</h2>'
+            obs = 'OBS! Der er færre end 70 linjer, du har nok gjort noget forkert'
         return render(request, 'home.html', {
             'task_id' : task.task_id,
             'df': df.to_html(index=False),
