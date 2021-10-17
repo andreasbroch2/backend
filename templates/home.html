@@ -33,7 +33,7 @@
 
   {% if df %}
   <div class="df">
-    Dette er blevet importeret. Dobbelttjek venligst :) 
+    <h3>Dette er blevet importeret. Dobbelttjek venligst :)</h3> 
     {{ obs }}
     {{ df |safe }}
     {{ status }}
@@ -53,7 +53,7 @@
   var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
 
   function customResult(resultElement, result) {
-    $(resultElement).append($("<p>").html("<h2>Ikke fundne linjer: </h2><br>" + result));
+    $(resultElement).append($("<p>").html("<h3>Ikke fundne linjer: </h3><br>" + result));
   }
 
   CeleryProgressBar.initProgressBar(progressUrl, {

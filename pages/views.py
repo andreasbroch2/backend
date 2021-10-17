@@ -34,13 +34,13 @@ def index(request):
         task = import_sales_csv.delay(df.to_dict())
         obs = ''
         if len(df.index) < 70:
-            obs = 'OBS! Der er færre end 70 linjer, du har nok gjort noget forkert'
+            obs = '<br><h2>OBS! Der er færre end 70 linjer, du har nok gjort noget forkert</h2>'
         return render(request, 'home.html', {
             'task_id' : task.task_id,
             'df': df.to_html(index=False),
             'obs': obs
             })
-            
+
     elif 'subscription-sales' in request.FILES:
         file = request.FILES['subscription-sales']
         lines = file.readlines()
