@@ -62,7 +62,8 @@ def index(request):
         # print(num_df)
         task = import_subscription_csv.delay(num_df.to_dict())
         return render(request, 'home.html', {
-            'task_id' : task.task_id
+            'task_id' : task.task_id,
+            'df': df.to_html(index=False)
             })
     elif 'juice' in request.POST:
         sh = gc.open('Mad')
