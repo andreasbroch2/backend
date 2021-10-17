@@ -40,12 +40,13 @@
     {{ login }}
     
   </div>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button type="submit" name="juice">Bestil Juice</button>
+  </form>
   {% endif %}
 </div>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <button type="submit" name="juice">Bestil Juice</button>
-</form>
+
 {% if task_id %}
 <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
 <script>
